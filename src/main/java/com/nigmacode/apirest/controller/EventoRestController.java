@@ -54,7 +54,7 @@ public class EventoRestController {
     }
 
     @GetMapping("/evento/{nombre}")
-    public List<Evento> getNombre(@PathVariable String nombre){
+    public List<Evento> getNombre(@PathVariable String nombre) {
         List<Evento> eventoList = eventoService.findByNombre(nombre);
 
         if(eventoList == null) {
@@ -65,7 +65,7 @@ public class EventoRestController {
     }
 
     @GetMapping("/evento/params")
-    public List<Evento> findByParameters(@RequestBody Evento evento){
+    public List<Evento> findByParameters(@RequestBody Evento evento) {
 
         List<Evento> list = eventoService.findByExample(evento);
         for (Evento u :list) {

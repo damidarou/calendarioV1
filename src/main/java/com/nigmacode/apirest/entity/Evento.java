@@ -35,14 +35,18 @@ public class Evento {
     private String ubicacion;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario", referencedColumnName = "cod_usuario", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "usuario", referencedColumnName = "cod_usuario", insertable = false, updatable = false)
     @JsonIgnoreProperties("eventos")
     private Usuario usaurio;
+
+    @OneToMany(mappedBy = "eventos1", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties("eventos1")
+    private List<Tipo_evento> tipo_eventos;
 
     public Evento() {
     }
 
-    public Evento(Integer cod_evento,int usuario, LocalDate fecha, Time hora, String nombre, String descripcion, String ubicacion) {
+    public Evento(Integer cod_evento, int usuario, LocalDate fecha, Time hora, String nombre, String descripcion, String ubicacion) {
         this.cod_evento = cod_evento;
         this.usuario = usuario;
         this.fecha = fecha;
@@ -58,6 +62,14 @@ public class Evento {
 
     public void setUsuario(int usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Tipo_evento> getTipo_eventos() {
+        return tipo_eventos;
+    }
+
+    public void setTipo_eventos(List<Tipo_evento> tipo_eventos) {
+        this.tipo_eventos = tipo_eventos;
     }
 
     public LocalDate getFecha() {

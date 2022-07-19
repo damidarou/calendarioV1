@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.nigmacode.apirest.entity.Evento;
 import com.nigmacode.apirest.entity.Usuario;
 import com.nigmacode.apirest.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,11 @@ public class UsuarioRestController {
     @GetMapping("/usuario")
     public List<Usuario> findAll() {
         try {
-
+            for(Usuario usuarios : usuarioService.findAll()){
+                for(Evento eventos : usuarios.getEventos()){
+                    eventos.setTipo_eventos(null);
+                }
+            }
         } catch (IllegalArgumentException err){
             List<Usuario> p = new ArrayList<>();
             return p;

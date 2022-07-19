@@ -28,6 +28,10 @@ public class Usuario {
     @JsonIgnoreProperties("usaurio")
     private List<Evento> eventos;
 
+    @OneToMany(mappedBy = "usuario1", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties("usuario1")
+    private List<Recordatorio> recordatorios;
+
     public Usuario() {
     }
 
@@ -74,6 +78,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Recordatorio> getRecordatorios() {
+        return recordatorios;
+    }
+
+    public void setRecordatorios(List<Recordatorio> recordatorios) {
+        this.recordatorios = recordatorios;
     }
 
     @Override
